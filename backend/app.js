@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./models/User'); 
 require('dotenv').config();
+const cors= require('cors')
 
 const app = express();
-
+app.use(cors()); 
 // Middleware to parse incoming request body
 app.use(bodyParser.json()); // for JSON data
 app.use(bodyParser.urlencoded({ extended: true })); // for form data
