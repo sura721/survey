@@ -55,7 +55,7 @@ const Surveys = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch("https://survey-kd6u.onrender.com", {
+            const response = await fetch("https://businesssurvey.onrender.com/api/submit-survey", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
