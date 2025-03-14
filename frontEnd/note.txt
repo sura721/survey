@@ -1,0 +1,76 @@
+my-todo-app/
+├── backend/
+│   ├── node_modules/
+│   ├── .env
+│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── node_modules/
+│   ├── build/
+│   ├── public/
+│   ├── src/
+│   └── package.json
+├── .gitignore  # Moved to the root folder
+├── README.md
+└── package.json
+
+
+
+
+
+
+
+
+
+
+
+
+FULL STACK FOLDER STRUCTURE
+
+
+my-fullstack-app/
+├── backend/                 # Node.js server (Express API)
+│   ├── models/              # Database models
+│   ├── routes/              # API routes
+│   ├── server.js            # Express server file
+│   └── .env                 # Environment variables
+├── frontend/                # React app
+│   ├── public/              # Public files for React
+│   ├── src/                 # React components, logic
+│   └── package.json         # React project configuration
+├── .gitignore               # To ignore node_modules, build files
+├── package.json             # Common dependencies (React & Express)
+└── README.md
+
+
+CAPLOIT
+NodeTodo/
+├── backend/
+│   ├── controllers/
+│   │   └── authController.js
+│   ├── models/
+│   │   └── User.js
+│   ├── routes/
+│   │   └── authroutes.js
+│   ├── app.js
+│   └── config/
+│       └── db.js
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   └── ...
+│   │   ├── App.js
+│   │   ├── index.js
+│   │   └── ...
+│   ├── package.json
+│   └── ...
+├── package.json
+└── README.md
+
+
+
+MAKING NAVBAR THAT HAS TEH FOLLOWING.
+
+LOGO  ADDTASK  RECYCLEBIN  TASKS, completedTasks  

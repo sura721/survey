@@ -1,0 +1,142 @@
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            background-image:url("../assets/image.png");
+            background-size: cover; /* Cover the entire viewport */
+            background-position: center; /* Center the image */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:url("image.jpg");
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px); /* Adjust the blur value as needed */
+            z-index: -1; /* Behind other content */
+}
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+        .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+        height: 100vh; /* Full height */
+        background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 10; /* On top of other content */
+}
+
+    .spinner {
+        border: 8px solid rgba(255, 255, 255, 0.3); /* Light color for spinner */
+        border-top: 8px solid orange; /* Bright color for spinner */
+        border-radius: 50%;
+        width: 50px; /* Size of the spinner */
+        height: 50px; /* Size of the spinner */
+        animation: spin 1s linear infinite; /* Spin animation */
+        margin-right: 15px; /* Space between spinner and text */
+}
+
+
+@keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+}
+        h1 {
+            color: orange;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+            text-align: left;
+            color: white;
+        }
+        input[type="text"], input[type="tel"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid gold;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+        }
+        button {
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: red;
+        }
+        .question {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .hidden {
+            display: none; /* Class to hide elements */
+        }
+        #thankYouMessage {
+            text-align: center;
+            display: none;
+        }
+        #thankYouMessage h1 {
+            color: orange;
+        }
+        #thankYouMessage p {
+            color: #ddd;
+            margin: 20px 0;
+        }
+        #thankYouMessage button {
+            background-color: orange;
+            color: white;
+            border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+#thankYouMessage button:hover {
+    background-color: red;
+}
+   
