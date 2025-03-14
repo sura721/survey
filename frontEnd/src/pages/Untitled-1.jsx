@@ -1,9 +1,8 @@
-import '../styles/surveys.css'
+import '../styles/surveys.css';
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Surveys = () => {
-      const [isSubmitting, setIsSubmitting] = useState(false); 
     const [userData, setUserData] = useState({
         questionOne: [],
         usersJob: '',
@@ -15,65 +14,60 @@ const Surveys = () => {
         address: '',
         gender: ''
     });
+    const [isSubmitting, setIsSubmitting] = useState(false); // New state for submission loading
+    const [showWelcome, setShowWelcome] = useState(true);
+    const [showSurvey, setShowSurvey] = useState(false);
+    const [showThankYou, setShowThankYou] = useState(false);
     const history = useNavigate();
 
-    function startSurvey() {
-        // Create a loading overlay
+    const startSurvey = () => {
         const loadingOverlay = document.createElement('div');
         loadingOverlay.className = 'loading';
-
-        // Create a spinner
         const spinner = document.createElement('div');
         spinner.className = 'spinner';
-
         loadingOverlay.appendChild(spinner);
-        loadingOverlay.innerHTML += ' processing...'; // "Please wait..."
+        loadingOverlay.innerHTML += ' processing...';
         document.body.appendChild(loadingOverlay);
 
-        // Simulate a loading process
         setTimeout(() => {
-            document.getElementById('welcomePage').classList.add('hidden'); // Hide welcome page
-            document.getElementById('surveyContainer').classList.remove('hidden'); // Show survey
-            document.body.removeChild(loadingOverlay); // Remove loading overlay
-        }, 2000); // Adjust time as needed (2000ms = 2 seconds)
-    }
+            document.getElementById('welcomePage').classList.add('hidden'); 
+            document.getElementById('surveyContainer').classList.remove('hidden');
+            document.body.removeChild(loadingOverlay); 
+        }, 2000);
+    };
 
-    const handleUsersJobChange = (event) => {
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
         setUserData((prevState) => ({
             ...prevState,
-            usersJob: event.target.value
+            [name]: value
         }));
     };
 
-    const handleUsersJobType = (event) => {
-        setUserData((prevState) => ({
-            ...prevState,
-            jobType: event.target.value
-        }));
+    const handleQuestionOne = (e) => {
+        const { value, checked } = e.target;
+        setUserData(prevState => {
+            const updatedQuestionOne = checked
+                ? [...prevState.questionOne, value]
+                : prevState.questionOne.filter(item => item !== value);
+            return {
+                ...prevState,
+                questionOne: updatedQuestionOne
+            };
+        });
     };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     const submitSurvey = async (e) => {
         e.preventDefault();
+
+        // Validate at least one option is selected for questionOne
         if (userData.questionOne.length === 0) {
             alert("Please select at least one option for question 1.");
             return;
         }
-        setIsSubmitting(true)
+
+        setIsSubmitting(true); // Disable the button and show loading
+
         try {
             const response = await fetch("https://businesssurvey.onrender.com/api/submit-survey", {
                 method: "POST",
@@ -91,76 +85,41 @@ const Surveys = () => {
             console.log("Success:", result);
 
             // Hide survey form and show thank you message
-            document.getElementById("surveyContainer").classList.add("hidden");
-            document.getElementById("thankYouMessage").classList.remove("hidden");
-
+            setShowSurvey(false);
+            setShowThankYou(true);
             history("/thanks");
 
         } catch (error) {
             console.error("Error:", error);
             alert("Failed to submit survey. Please try again.");
-        }finally{
-            setIsSubmitting(false)
+        } finally {
+            setIsSubmitting(false); // Re-enable the button
         }
-    };
-
-    const handleQuestionOne = (e) => {
-        const { value, checked } = e.target;
-
-        setUserData(prevState => {
-            const updatedQuestionOne = checked
-                ? [...prevState.questionOne, value]  // Add value if checked
-                : prevState.questionOne.filter(item => item !== value);  // Remove value if unchecked
-
-            return {
-                ...prevState,
-                questionOne: updatedQuestionOne
-            };
-        });
-    };
-
-    const handleLevelOfEducationChange = (event) => {
-        setUserData((prevState) => ({
-            ...prevState,
-            levelOfEducation: event.target.value
-        }));
-    };
-
-    const handleWayOfGettingInfoChange = (event) => {
-        setUserData((prevState) => ({
-            ...prevState,
-            wayOfGettingInfo: event.target.value
-        }));
-    };
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setUserData((prevState) => ({
-            ...prevState,
-            [name]: value
-        }));
     };
 
     return (
         <>
-            <div className="container" id="welcomePage">
-                <h1>እንኳን ደህና መጡ!</h1>
-                <p>
-                    ይህ መጠይቅ የተዘጋጀው ህይወታቸው ላይ ትላልቅ አውንታዊ ለውጥን በሁሉም በህይወት ዘርፋቸው ላይ ለማምጣት ዝግጁ የሆኑ ቀና አስተሳሰብ ያላቸው ነቃ በለው
-                </p>
-                <button onClick={() => startSurvey()}>Start Survey</button>
-            </div>
+            {showWelcome && (
+                <div className="container" id="welcomePage">
+                    <h1>እንኳን ደህና መጡ!</h1>
+                    <p>
+                        ይህ መጠይቅ የተዘጋጀው ህይወታቸው ላይ ትላልቅ አውንታዊ ለውጥን በሁሉም በህይወት ዘርፋቸው ላይ ለማምጣት ዝግጁ የሆኑ ቀና አስተሳሰብ ያላቸው ነቃ በለው
+                    </p>
+                    <button onClick={startSurvey}>Start Survey</button>
+                </div>
+            )}
 
-            <div className="container hidden" id="surveyContainer">
-                <h1>የቢዝነስ እድል</h1>
-                <p>
-                    እንኳን ደህና መጡ። ይህ መጠይቅ የተዘጋጀው ህይወታቸው ላይ ትላልቅ አውንታዊ ለውጥን በሁሉም በህይወት ዘርፋቸው ላይ ለማምጣት ዝግጁ የሆኑ ቀና አስተሳሰብ ያላቸው ነቃ በለው
-                </p>
+            {showSurvey && (
+                <div className="container" id="surveyContainer">
+                    <h1>የቢዝነስ እድል</h1>
+                    <p>
+                        እንኳን ደህና መጡ። ይህ መጠይቅ የተዘጋጀው ህይወታቸው ላይ ትላልቅ አውንታዊ ለውጥን በሁሉም በህይወት ዘርፋቸው ላይ ለማምጣት ዝግጁ የሆኑ ቀና አስተሳሰብ ያላቸው ነቃ በለው
+                    </p>
 
-                <form onSubmit={submitSurvey} >
+                    <form onSubmit={submitSurvey}>
                     <div className="question">
                         <label>1. ይህ ቢዝነስ የቢዝነስ ዕድል ለሁሉም ቢደረስም ለሁሉም ግን አይሆንም! እርሷም ከዚህ በታች ካሉት ውስጥ ለምን ለእርሶ አንደሚሆን ይምረጡ:</label>
-                        <label><input  type="checkbox" name="question1" value="ተጨማሪ ገቢ ስለምፈልግ" onClick={handleQuestionOne} /> ተጨማሪ ገቢ ስለምፈልግ</label>
+                        <label><input required type="checkbox" name="question1" value="ተጨማሪ ገቢ ስለምፈልግ" onClick={handleQuestionOne} /> ተጨማሪ ገቢ ስለምፈልግ</label>
                         <label><input type="checkbox" name="question1" value="አሁን ካለሁበት የተሻለ ቦታ መሆን ስለምፈልግ" onClick={handleQuestionOne} /> አሁን ካለሁበት የተሻለ ቦታ መሆን ስለምፈልግ</label>
                         <label><input type="checkbox" name="question1" value="ለወቅቱ የሚመጥን የገቢ አማረጭ ስለምፈልግ" onClick={handleQuestionOne} /> ለወቅቱ የሚመጥን የገቢ አማረጭ ስለምፈልግ</label>
                         <label><input type="checkbox" name="question1" value="በወጣትነቴ ሀብታም መሆን እና ጡረታ መውጣት ስለምፈልግ" onClick={handleQuestionOne} /> በወጣትነቴ ሀብታም መሆን እና ጡረታ መውጣት ስለምፈልግ</label>
@@ -239,10 +198,7 @@ const Surveys = () => {
                         <h1>እናመሰግናለን!</h1>
                         <p>We greatly appreciate you taking the time to complete the survey.</p>
                     </div>
-
-
-
-                    <button type="submit" disabled={isSubmitting}>
+                        <button type="submit" disabled={isSubmitting}>
                             {isSubmitting ? (
                                 <>
                                     <span className="spinner"></span> Submitting...
@@ -251,15 +207,18 @@ const Surveys = () => {
                                 "አስተያየት ይላኩ"
                             )}
                         </button>
+                    </form>
+                </div>
+            )}
 
-                    {/* <button type="submit" >አስተያየት ይላኩ</button> */}
-                </form>
-            </div>
+            {showThankYou && (
+                <div className="container" id="thankYouMessage">
+                    <h1>እናመሰግናለን!</h1>
+                    <p>We greatly appreciate you taking the time to complete the survey.</p>
+                </div>
+            )}
         </>
     );
 };
 
 export default Surveys;
-
-
-// eyoabssurveys
