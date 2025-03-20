@@ -1,1 +1,1 @@
-hey this is just simple mern stack survey app,  its has backedn with node js/express and react on front end 
+This is a simple survey application built using the MERN Stack (MongoDB, Express, React, Node.js). The app allows users to create surveys, answer questions, and submit responses. It features a backend server built with Node.js and Express, and a frontend built with React.
