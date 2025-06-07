@@ -112,7 +112,7 @@ const Surveys = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch("https://businesssurvey-gvrb.onrender.com", {
+            const response = await fetch("https://businesssurvey-gvrb.onrender.com/api/submit-survey", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
