@@ -1,0 +1,46 @@
+.thanks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: #fff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  padding: 2rem;
+}
+
+.thanks-title {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.thanks-message {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.thanks-coming {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+  .thanks-title {
+    font-size: 2.2rem;
+  }
+
+  .thanks-message {
+    font-size: 1.2rem;
+  }
+
+  .thanks-coming {
+    font-size: 1rem;
+  }
+
+  .thanks-container {
+    padding: 1.5rem;
+  }
+}

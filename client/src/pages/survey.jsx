@@ -1,4 +1,5 @@
 import '../styles/surveys.css';
+import { Loader, Loader2 } from 'lucide-react';
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
@@ -169,13 +170,16 @@ const Surveys = () => {
     const addressQuestionLabel = `${currentDisplayQuestionNumber}. አድራሻ (ከተማ)*`;
     currentDisplayQuestionNumber++;
     const genderQuestionLabel = `${currentDisplayQuestionNumber}. ፆታ*`;
-
+    const [test,setStest]=useState(true)
 
     return (
         <>
+            
+ 
+
             {isLoading && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center z-50 text-white text-lg">
-                    <div className="spinner"></div> processing...
+                    <div > <Loader className='animate-spin w-6 h-6 text-gray-500'/></div> processing...
                 </div>
             )}
 
@@ -193,7 +197,7 @@ const Surveys = () => {
                     >
                          {isLoading ? (
                             <>
-                                <span className="spinner spinner-small"></span> Loading...
+                                <span className="spinner spinner-small"><Loader className='animate-spin w-6 h-6 text-gray-500'/></span> Loading...
                             </>
                         ) : (
                             'Start Survey'
@@ -369,7 +373,7 @@ const Surveys = () => {
                         <button type="submit" className="submit-button bg-[#ff9900] hover:bg-[#e68a00] text-white py-3 px-6 rounded-md text-lg font-semibold transition duration-300 w-full text-center disabled:bg-gray-400 disabled:cursor-not-allowed mt-4">
                             {isSubmitting ? (
                                 <>
-                                    <span className="spinner spinner-small"></span> Submitting...
+                                    <span ><Loader className='animate-spin w-6 h-6 text-gray-500'/></span> Submitting...
                                 </>
                             ) : (
                                 "አስተያየት ይላኩ"
