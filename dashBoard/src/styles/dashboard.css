@@ -1,0 +1,302 @@
+/* dashboard.css - Styles for the Survey Dashboard Component */
+
+/*
+   This file contains styles specifically for the dashboard component.
+   It avoids global selectors like 'body' to prevent affecting other
+   parts of your application.
+*/
+
+/* Main Dashboard Container */
+/* Translates: min-h-screen bg-gray-100 py-10 flex justify-center items-start */
+.dashboard-page-container {
+    min-height: 100vh; /* min-h-screen */
+    background-color: #f3f4f6; /* bg-gray-100 */
+    padding-top: 2.5rem; /* py-10 (10 * 0.25rem = 2.5rem) */
+    padding-bottom: 2.5rem; /* py-10 */
+    display: flex; /* flex */
+    justify-content: center; /* justify-center */
+    align-items: flex-start; /* items-start */
+    font-family: 'Arial', sans-serif; /* Best fonts - use a common web-safe stack */
+    color: #333; /* Default text color */
+}
+
+
+/* Inner Content Container */
+/* Translates: bg-white bg-opacity-95 p-6 md:p-8 rounded-lg shadow-xl max-w-4xl w-11/12 mx-auto border border-gray-200 */
+.dashboard-content-container {
+    background-color: rgba(255, 255, 255, 0.95); /* bg-white bg-opacity-95 */
+    padding: 1.5rem; /* p-6 (6 * 0.25rem = 1.5rem) */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05); /* shadow-xl */
+    max-width: 56rem; /* max-w-4xl (64rem * 0.875 = 56rem, approximation for common breakpoints) */
+    width: 91.666667%; /* w-11/12 */
+    margin-left: auto; /* mx-auto */
+    margin-right: auto; /* mx-auto */
+    border: 1px solid #e5e7eb; /* border border-gray-200 */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+/* Dashboard Title */
+/* Translates: text-2xl md:text-3xl font-bold text-[#55626e] text-center mb-8 */
+.dashboard-content-container h1 {
+    font-size: 1.5rem; /* text-2xl */
+    line-height: 2rem; /* leading-8 (Tailwind default for text-2xl) */
+    font-weight: 700; /* font-bold */
+    color: #55626e; /* text-[#55626e] */
+    text-align: center; /* text-center */
+    margin-bottom: 2rem; /* mb-8 (8 * 0.25rem = 2rem) */
+}
+
+/* Dashboard Actions Container (for Clear All button) */
+/* Translates: flex justify-end mb-6 */
+.dashboard-actions {
+    display: flex; /* flex */
+    justify-content: flex-end; /* justify-end */
+    margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* Clear All Button */
+/* Translates: bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed text-base */
+.clear-all-button {
+    background-color: #dc2626; /* bg-red-600 */
+    color: #ffffff; /* text-white */
+    font-weight: 700; /* font-bold */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    border-radius: 0.25rem; /* rounded */
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    cursor: pointer; /* cursor-pointer */
+    font-size: 1rem; /* text-base */
+    line-height: 1.5rem; /* leading-6 (Tailwind default for text-base) */
+    border: none; /* Remove default button border */
+    text-align: center; /* Center text in button */
+}
+
+.clear-all-button:hover {
+    background-color: #b91c1c; /* hover:bg-red-700 */
+}
+
+.clear-all-button:disabled {
+    background-color: #a1a1aa; /* disabled:bg-gray-400 */
+    cursor: not-allowed; /* disabled:cursor-not-allowed */
+    opacity: 0.6; /* Common disabled appearance */
+}
+
+
+/* --- Content Loading/Error/Empty States --- */
+
+/* Loading Overlay/State */
+/* Translates: flex flex-col items-center justify-center min-h-[200px] text-gray-700 */
+.dashboard-loading-state {
+    display: flex; /* flex */
+    flex-direction: column; /* flex-col */
+    align-items: center; /* items-center */
+    justify-content: center; /* justify-center */
+    min-height: 200px; /* min-h-[200px] */
+    color: #4b5563; /* text-gray-700 */
+    text-align: center; /* Ensure text is centered */
+}
+
+/* Best Loader Style (Spinner) */
+/* Translates: w-10 h-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin */
+/* Requires @keyframes spin to be defined somewhere, e.g., in a global style file */
+.dashboard-loading-state .spinner {
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    border-width: 4px; /* border-4 */
+    border-style: solid; /* border */
+    border-color: #d1d5db; /* border-gray-300 */
+    border-top-color: #3b82f6; /* border-t-blue-500 */
+    border-radius: 50%; /* rounded-full */
+    animation: spin 1s linear infinite; /* animate-spin */
+    margin-bottom: 0.75rem; /* mt-3 (adjusted for spacing below spinner) */
+}
+
+/* Keyframes for the spinner animation (required if not global) */
+/* You might already have this if Tailwind is used for other animations */
+/* If not, add this block */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+
+/* Loading Text */
+/* Translates: mt-3 text-lg */
+.dashboard-loading-state p {
+     margin-top: 0; /* Already added margin to spinner */
+     font-size: 1.125rem; /* text-lg */
+     line-height: 1.75rem; /* leading-7 (Tailwind default for text-lg) */
+}
+
+
+/* Error State */
+/* Translates: text-red-600 text-center font-bold mt-8 text-lg p-4 bg-red-100 rounded-md */
+.dashboard-error-state {
+    color: #dc2626; /* text-red-600 */
+    text-align: center; /* text-center */
+    font-weight: 700; /* font-bold */
+    margin-top: 2rem; /* mt-8 */
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75rem; /* leading-7 */
+    padding: 1rem; /* p-4 */
+    background-color: #fee2e2; /* bg-red-100 */
+    border-radius: 0.375rem; /* rounded-md */
+}
+
+/* Empty State */
+/* Translates: text-gray-600 text-center text-xl mt-10 */
+.dashboard-empty-state {
+    color: #4b5563; /* text-gray-600 */
+    text-align: center; /* text-center */
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.75rem; /* leading-7 */
+    margin-top: 2.5rem; /* mt-10 */
+}
+
+
+/* --- User List and Cards --- */
+
+/* Users List Container */
+/* Translates: flex flex-col space-y-6 */
+.users-list {
+    display: flex; /* flex */
+    flex-direction: column; /* flex-col */
+    /* Simulate space-y-6 with margin-top on children */
+    /* gap: 1.5rem; */ /* Using gap is simpler if the container can be flex */
+}
+/* Applying margin-top to direct children to simulate space-y-6 */
+.users-list > div:not(:first-child) {
+    margin-top: 1.5rem; /* space-y-6 (6 * 0.25rem = 1.5rem) */
+}
+
+
+/* Single User Survey Card */
+/* Translates: bg-white border border-gray-200 rounded-lg shadow-md p-6 relative break-words */
+.user-card {
+    background-color: #ffffff; /* bg-white */
+    border: 1px solid #e5e7eb; /* border border-gray-200 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* shadow-md */
+    padding: 1.5rem; /* p-6 */
+    position: relative; /* relative (for absolute positioning of delete button) */
+    word-break: break-word; /* break-words */
+    overflow-wrap: break-word; /* break-words fallback */
+}
+
+/* User Name inside Card */
+/* Translates: text-[#ff9900] text-xl font-semibold mb-4 pb-2 border-b border-gray-200 */
+.user-card h3 {
+    color: #ff9900; /* text-[#ff9900] */
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.75rem; /* leading-7 */
+    font-weight: 600; /* font-semibold */
+    margin-bottom: 1rem; /* mb-4 */
+    padding-bottom: 0.5rem; /* pb-2 */
+    border-bottom: 1px solid #e5e7eb; /* border-b border-gray-200 */
+    margin-top: 0; /* Ensure no default margin-top */
+}
+
+/* Paragraphs inside User Card */
+/* Translates: text-gray-700 mb-2 */
+.user-card p {
+    color: #4b5563; /* text-gray-700 */
+    margin-bottom: 0.5rem; /* mb-2 */
+    line-height: 1.5; /* Added for readability */
+}
+
+/* Strong tags (labels) inside Paragraphs */
+/* Translates: text-gray-900 */
+.user-card p strong {
+    color: #111827; /* text-gray-900 */
+    font-weight: 700; /* font-bold */
+    margin-right: 0.25rem; /* Small space after label */
+}
+
+/* Question 1 List Container */
+/* Translates: mt-4 pt-4 border-t border-gray-200 */
+.user-card .q1-list-container {
+    margin-top: 1rem; /* mt-4 */
+    padding-top: 1rem; /* pt-4 */
+    border-top: 1px solid #e5e7eb; /* border-t border-gray-200 */
+}
+
+/* Question 1 List (ul) */
+/* Translates: list-disc list-inside text-gray-700 */
+.user-card ul {
+    list-style-type: disc; /* list-disc */
+    list-style-position: inside; /* list-inside */
+    color: #4b5563; /* text-gray-700 */
+    margin: 0; /* Remove default ul margin */
+    padding-left: 0; /* Remove default ul padding */
+}
+
+/* List items inside Question 1 list */
+/* Translates: mb-1 */
+.user-card ul li {
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+
+
+/* Delete User Button (inside card) */
+/* Translates: absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white font-bold py-1.5 px-3 rounded text-sm transition duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed */
+.delete-user-button {
+    position: absolute; /* absolute */
+    top: 1rem; /* top-4 */
+    right: 1rem; /* right-4 */
+    background-color: #dc2626; /* bg-red-600 */
+    color: #ffffff; /* text-white */
+    font-weight: 700; /* font-bold */
+    padding-top: 0.375rem; /* py-1.5 */
+    padding-bottom: 0.375rem; /* py-1.5 */
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem; /* px-3 */
+    border-radius: 0.25rem; /* rounded */
+    font-size: 0.875rem; /* text-sm */
+    line-height: 1.25rem; /* leading-5 */
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; /* transition */
+    transition-duration: 300ms; /* duration-300 */
+    cursor: pointer; /* cursor-pointer */
+    border: none; /* Remove default button border */
+    text-align: center; /* Center text in button */
+}
+
+.delete-user-button:hover {
+     background-color: #b91c1c; /* hover:bg-red-700 */
+}
+
+.delete-user-button:disabled {
+    background-color: #a1a1aa; /* disabled:bg-gray-400 */
+    cursor: not-allowed; /* disabled:cursor-not-allowed */
+    opacity: 0.6; /* Common disabled appearance */
+}
+
+
+/* --- Responsive Adjustments --- */
+
+/* Adjustments for medium screens and up (md:) */
+@media (min-width: 768px) {
+    .dashboard-content-container {
+        padding: 2rem; /* md:p-8 (8 * 0.25rem = 2rem) */
+    }
+
+    .dashboard-content-container h1 {
+        font-size: 1.875rem; /* md:text-3xl */
+        line-height: 2.25rem; /* leading-9 */
+    }
+
+    .dashboard-actions {
+        justify-content: flex-end; /* md:justify-end (already default, but explicit) */
+        text-align: right; /* Ensure text alignment for button container */
+    }
+}
+
+/* Further adjustments for smaller screens if needed */
+@media (max-width: 767px) {
+     .dashboard-actions {
+        justify-content: center; /* Center button on smaller screens */
+     }
+}
