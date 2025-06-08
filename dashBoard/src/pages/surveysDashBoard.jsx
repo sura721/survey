@@ -6,7 +6,7 @@ const SurveyDashboard = () => {
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(true); // Loading state for initial fetch
     const [error, setError] = useState(null); // State to hold fetch errors
-    const [isDeleting, setIsDeleting] = useState(false); // State for single item deletion
+    const [isDeleting, setIsDeleting] = useState(false); 
     const [isClearing, setIsClearing] = useState(false); // State for clear all
 
     // Function to fetch survey data
