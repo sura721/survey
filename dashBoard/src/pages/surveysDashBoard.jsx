@@ -22,7 +22,8 @@ const SurveyDashboard = () => {
             const result = await response.json();
             setUsers(result.usersData || []);
         } catch (err) {
-            setError(`Failed to load survey data: Please  connect to internate.`);
+            console.error("Error fetching survey data:", err);
+            setError(`Failed to load survey data: ${err.message}. Please try again.`);
         } finally {
             setIsLoading(false);
         }
@@ -52,8 +53,10 @@ const SurveyDashboard = () => {
             }
 
             setUsers(currentUsers => currentUsers.filter(user => user._id !== userId));
+            console.log("User deleted successfully");
 
         } catch (err) {
+            console.error("Error deleting user:", err);
             setError(`Failed to delete entry: ${err.message}. Please try again.`);
         } finally {
             setIsDeleting(false);
@@ -80,9 +83,10 @@ const SurveyDashboard = () => {
             }
 
             setUsers([]);
+             console.log("All users deleted successfully");
 
         } catch (err) {
-           
+            console.error("Error clearing all users:", err);
             setError(`Failed to clear all entries: ${err.message}. Please try again.`);
         } finally {
             setIsClearing(false);
@@ -93,8 +97,8 @@ const SurveyDashboard = () => {
     let content;
     if (isLoading) {
          content = (
-            <div className="dashboard-loading-state">
-                <div className="spinner"></div>
+            <div className="dashboard-loading-state"> {/* Applied CSS class */}
+                <div className="spinner"></div> {/* Applied CSS class (requires @keyframes spin) */}
                 <p>Loading survey data...</p>
             </div>
         );
